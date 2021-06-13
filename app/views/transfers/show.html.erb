@@ -1,0 +1,80 @@
+
+
+<div class="flex flex-row ">
+  <div class="flex flex-col w-full">
+  <div class="-my-2 overflow-x-auto">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="mt-12 shadow-lg overflow-hidden border border-gray-200 sm:rounded-lg ">
+      <div class="flex justify-around">
+        <div class="text-center text-3xl my-3 ">Date: <i><%= @transfer.date %></i></div>
+        <div class="text-center text-3xl my-3"> Concept: <i><%= @transfer.concept %></i></div>
+        <div class="text-center text-3xl my-3">
+        <% total = 0%>
+        <% @transfer.items.each do |item|%>
+        <% total+= item.amount%>
+        <%end%>
+        Total: <i>$<%= total %></i>
+        </div>
+        </div>
+        <table class="min-w-full divide-y divide-gray-200 border-b border-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
+                ID
+              </th>
+              <th scope="col" class="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
+                Name
+              </th>
+              <th scope="col" class="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
+                Description
+              </th>
+              <th scope="col" class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+          <% Item.where(["category_id = #{@transfer.id}"]).each do |i| %>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="ml-4">
+                    <div class=" font-medium text-gray-900">
+                        <%= i.id %>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="ml-4">
+                    <div class=" font-medium text-gray-900">
+                      <%= i.name %>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="ml-4">
+                    <div class=" font-medium text-gray-900">
+                      <%= i.description %>
+                    </div>
+                  </div>
+                </div>
+              </td>
+               <td class="px-6 py-4 whitespace-nowrap flex flex-row gap-3">
+                <%= link_to '<div>&#x2630; </div>'.html_safe, i, title: "Show Budget" %>
+                <%= link_to '<div>&#x270E; </div>'.html_safe, edit_item_path(i), title: "Edit Budget" %>
+                <%= link_to '<div>&#x2718;</div>'.html_safe, i, method: :delete, data: { confirm: 'Are you sure?' }, title: "Delete Budget" %>
+              </td>
+              </tr>
+
+          <% end %>
+          </tbody>
+          </table>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

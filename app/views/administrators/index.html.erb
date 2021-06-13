@@ -1,0 +1,75 @@
+<div class="flex flex-row ">
+  <div class="flex flex-col w-full">
+  <div class="-my-2 overflow-x-auto">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="mt-12 shadow-lg overflow-hidden border border-gray-200 sm:rounded-lg">
+        <div class="text-center text-3xl my-3 font-semibold">Admin Panel</div>
+        <table class="min-w-full divide-y divide-gray-200 border-b border-gray-200">
+          <thead class="bg-gray-50">
+              <th scope="col" class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">
+                Name
+              </th>
+              <th scope="col" class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">
+                Is Admin?
+              </th>
+              <th scope="col" class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
+             <tr>
+          </thead>
+
+          <tbody class="bg-white divide-y divide-gray-200 ">
+            <% if can? :index, :administrator %>
+              <% @users.each do |user| %>
+                <tr>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <div class="ml-4">
+                      <div class=" font-medium text-gray-900">
+                        <%= user.last_name %>, </strong><%= user.first_name %>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <div class="ml-4">
+                      <div class=" font-medium text-gray-900">
+                        <%= user.admin? %>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <div class="ml-4">
+                      <div class=" font-medium text-gray-900">
+                         <% if can? :toggle_admin, :administrator %>
+                          <% if user.admin? %>
+                            <%= link_to '<div class="text-lg">&#x2718;</div>'.html_safe, toggle_admin_url(id: user.id), class: 'btn btn-danger', title: "Revoke Privileges" %>
+                          <% else %> 
+                            <%= link_to '<div class="text-lg">&#x2713;</div>'.html_safe, toggle_admin_url(id: user.id), class: 'btn btn-success' , title: "Grant Privileges"%>
+                          <% end %>
+                        <% else %>
+                          <strong>-</strong>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                </tr>
+              <% end %>
+            <% else %>
+            <tr>
+              <td colspan="4">
+                <div class="alert alert-warning">
+                  Ud. no tiene permiso para ver <strong>Administradores de Sistema!</strong>
+                </div>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>

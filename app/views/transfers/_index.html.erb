@@ -1,0 +1,81 @@
+<p id="notice"><%= notice %></p>
+
+<div class="flex flex-col text-sm">
+  <div class="-my-2 overflow-x-auto">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+       <div class="mt-12 shadow-lg overflow-hidden border border-gray-200 sm:rounded-lg">
+        <div class="text-center text-3xl my-3 font-semibold">Recent Transfers</div>
+        <div class='flex justify-around my-6 mx-12'>
+          <div class="w-full">
+            <%= link_to '<div >&#10010; New Transfer</div>'.html_safe , budgets_url , title: "New Transfer", :class=> "w-full flex justify-center py-2 px-4 border border-transparent font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"  %>
+          </div>
+        </div>
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
+                Date
+              </th>
+              <th scope="col" class="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
+                Account
+              </th>
+              <th scope="col" class="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
+                Qty
+              </th>
+              <th scope="col" class="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
+                Details
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+           <% @transfers.each do |transfer| %>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="ml-4">
+                    <div class=" font-medium text-gray-900">
+                      <%= transfer.date %>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="ml-4">
+                    <div class=" font-medium text-gray-900">
+                      <%= transfer.account.name %>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="ml-4">
+                    <div class=" font-medium text-gray-900">
+                      <% total = 0 %>
+                      <% transfer.items.each do |i| %>
+                        <%total += i.amount %>
+                      <% end %>
+                      $<%= total %>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                <%= link_to '<div>&#x2630; </div>'.html_safe, transfer, title: "Show Transfer" %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div class="flex justify-between m-3 mx-12 items-center"> 
+          <div class=""><%= page_entries_info @transfers %></div>
+          <%= paginate @transfers, param_name: :t_page %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

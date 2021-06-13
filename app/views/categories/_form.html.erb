@@ -1,0 +1,35 @@
+<div class='my-24 mx-96'>
+
+<%= form_with(model: category) do |form| %>
+  <% if category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+        <% category.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field text-xl">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 border-gray-300 rounded-md", placeholder: "Name" %>
+  </div>
+
+  <div class="field text-xl">
+      <%= form.label :category_id , "Select a Parent Category", class: "flex w-full"  %>
+      <div class="flex justify-center p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 border-gray-300 rounded-md">
+      <%= form.collection_select :category_id, Category.where(category_id: nil), :id, :name, {  prompt: "None" } %>
+      </div>
+    </div>
+
+
+  <div class="actions">
+    <div class="flex w-full">
+      <%= form.submit "Create Category", :class=> "my-3 w-full flex justify-center py-2 px-4 border border-transparent text-xl font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"  %>
+    </div>
+  </div>
+<% end %>
+

@@ -1,0 +1,66 @@
+<div class='my-24 mx-96'>
+<%= form_with(model: budget) do |form| %>
+  <% if budget.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(budget.errors.count, "error") %> prohibited this budget from being saved:</h2>
+
+      <ul>
+        <% budget.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field text-xl">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: "p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 border-gray-300 rounded-md", placeholder: "Name" %>
+    </div>
+
+   <div class="field text-xl">
+      <%= form.label :from %>
+      <div class="flex justify-between p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 border-gray-300 rounded-md">
+      <%= form.date_select :from %>
+      </div>
+    </div>
+
+  <div class="field text-xl">
+      <%= form.label :expires %>
+      <div class="flex justify-between p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 border-gray-300 rounded-md">
+      <%= form.date_select :expires %>
+      </div>
+    </div>
+
+  <div class="field text-xl">
+      <%= form.label :items %>
+      <p class=" text-sm text-gray-700 "> Add Items to your new Bugdet, you can always come here later... :)</p>
+      <div class="p-3 grid grid-cols-2">
+      <% if !budget.id.nil?%>
+        <% Item.where(["budget_id = #{budget.id}"]).each do |item| %>
+        <div>
+          <%= form.check_box(:items, { :multiple => true, checked: true }, item.id, nil) %>
+          <%= item.name %>
+        </div>
+        <% end %>
+      <% end %>
+      <% Item.where(budget_id: nil).each do |item| %>
+      <div>
+        <%= form.check_box(:items, { :multiple => true }, item.id, nil) %>
+        <%= item.name %>
+      </div>
+      <% end %>
+      </div>
+      
+    </div>
+
+  <div class="hidden">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="actions">
+    <div class="flex w-full">
+      <%= form.submit "Create New Bugdet", :class=> "my-3 w-full flex justify-center py-2 px-4 border border-transparent text-xl font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"  %>
+    </div>
+  </div>
+<% end %>

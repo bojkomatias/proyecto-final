@@ -1,0 +1,44 @@
+
+<div class='my-24 mx-96'>
+<%= form_with(model: item) do |form| %>
+  <% if item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+        <% item.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <div class="field text-xl">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 border-gray-300 rounded-md", placeholder: "Name" %>
+  </div>
+
+  <div class="field text-xl">
+    <%= form.label :description %>
+    <%= form.text_field :description, class: "p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 border-gray-300 rounded-md", placeholder: "Name" %>
+  </div>
+
+  <div class="field text-xl">
+    <%= form.label :amount %>
+    <%= form.text_field :amount, class: "p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 border-gray-300 rounded-md", placeholder: "Name" %>
+  </div>
+
+  <div class="field text-xl">
+      <%= form.label :category_id , class: "flex w-full"  %>
+      <div class="flex justify-center p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 border-gray-300 rounded-md">
+      <%= form.collection_select :category_id, Category.all, :id, :name, { class: "bg-red-200" } %>
+      </div>
+    </div>
+
+  <div class="actions">
+    <div class="flex w-full">
+      <%= form.submit "Create Item", :class=> "my-3 w-full flex justify-center py-2 px-4 border border-transparent text-xl font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"  %>
+    </div>
+  </div>
+<% end %>
+</div>

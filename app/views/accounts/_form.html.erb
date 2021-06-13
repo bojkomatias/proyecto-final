@@ -1,0 +1,49 @@
+<div class='my-24 mx-96'>
+<%= form_with(model: account) do |form| %>
+  <% if account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
+
+      <ul>
+        <% account.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field text-xl">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 border-gray-300 rounded-md", placeholder: "Name" %>
+  </div>
+  
+  <div class="field text-xl">
+  <%= form.label :amount %>
+    <div class="mt-1 relative rounded-md shadow-sm">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <span class="text-gray-500 sm:text-sm">
+          $
+        </span>
+      </div>
+      <%= form.text_field :amount, class: "p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 border-gray-300 rounded-md", placeholder: "0.00" %>
+      
+      <div class="absolute inset-y-0 right-0 flex items-center text-xl">
+        <select id="currency" name="currency" class="focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500  rounded-md ">
+          <option>USD</option>
+          <option>CAD</option>
+          <option>EUR</option>
+        </select>
+      </div>
+  </div>
+
+  <div class="hidden">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="actions">
+    <div class="flex w-full">
+      <%= form.submit "Crear Cuenta", :class=> "my-3 w-full flex justify-center py-2 px-4 border border-transparent text-xl font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"  %>
+    </div>
+  </div>
+<% end %>
