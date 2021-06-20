@@ -11,7 +11,7 @@
         <div class="text-center text-3xl my-3">
         <% total = 0%>
         <% @transfer.items.each do |item|%>
-        <% total+= item.amount%>
+          <% total = total + item.amount %>
         <%end%>
         Total: <i>$<%= total %></i>
         </div>
@@ -28,9 +28,7 @@
               <th scope="col" class="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
                 Description
               </th>
-              <th scope="col" class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
+              
             </tr>
           </thead>
           <tbody>
@@ -63,11 +61,7 @@
                   </div>
                 </div>
               </td>
-               <td class="px-6 py-4 whitespace-nowrap flex flex-row gap-3">
-                <%= link_to '<div>&#x2630; </div>'.html_safe, i, title: "Show Budget" %>
-                <%= link_to '<div>&#x270E; </div>'.html_safe, edit_item_path(i), title: "Edit Budget" %>
-                <%= link_to '<div>&#x2718;</div>'.html_safe, i, method: :delete, data: { confirm: 'Are you sure?' }, title: "Delete Budget" %>
-              </td>
+              
               </tr>
 
           <% end %>

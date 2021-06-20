@@ -52,9 +52,9 @@
                   <div class="ml-4">
                     <div class=" font-medium text-gray-900">
                       <% total = 0 %>
-                      <% transfer.items.each do |i| %>
-                        <%total += i.amount %>
-                      <% end %>
+                        <% transfer.items.each do |i| %>
+                          <% total = total + i.amount %>
+                        <% end %>
                       $<%= total %>
                     </div>
                   </div>
