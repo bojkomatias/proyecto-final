@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.all
     @categories = Category.order(:id).page params[:page]
-    @categories = @categories.where(["id LIKE :search OR category_id LIKE :search", :search => ("%" + params[:search] + "%")]) unless params[:search].blank?
+    @categories = @categories.where(["cast(id as text) LIKE :search OR cast(category_id as text) LIKE :search", :search => ("%" + params[:search] + "%")]) unless params[:search].blank?
   end
 
   # GET /categories/1 or /categories/1.json
