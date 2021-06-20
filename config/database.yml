@@ -1,12 +1,12 @@
 default: &default
   adapter: pg
   encoding: unicode
-  host: ec2-52-5-247-46.compute-1.amazonaws.com # ec2-52-0-114-209.compute-1.amazonaws.com
-  database: d7svhh674j0779 # d86570o8jkr7di
+  host: ec2-52-0-114-209.compute-1.amazonaws.com
+  database: d86570o8jkr7di
   port: 5432
   pool: 5
-  username: xuneohdurnsnfx # gnggekjkgtfthy
-  password: 55cc95e1b48d7c55d8f545c92f8bc7ebae9fc21525115269b00b6cb4887e54a1 # 3e2bdadc5409f0ee3a1f5ef4b1348b38d56cf547aa2b6ff9d37b2df653a8a730
+  username: gnggekjkgtfthy
+  password: 3e2bdadc5409f0ee3a1f5ef4b1348b38d56cf547aa2b6ff9d37b2df653a8a730
 
 development:
   <<: *default

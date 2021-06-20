@@ -16,8 +16,10 @@
                <%= link_to 'Budgets', budgets_path, :class => "ml-3 relative bg-gray-800 text-white px-3 py-2 rounded-md font-medium hover:bg-gray-900 focus:bg-gray-700"  %>
                
                <%= select("post", "category_id", Category.where(category_id: nil).pluck(:name, :id), {:include_blank =>  'All Categories',:selected => params[:search]}, :onchange => 'window.location= `/categories?search=${document.getElementById("post_category_id").value}`', class: "ml-3 relative bg-gray-800 text-white px-3 py-2 rounded-md font-medium hover:bg-gray-900 focus:bg-gray-700") %>
-               <% if current_user.admin? %>
-                <%= link_to 'Admin Panel', administrators_path, :class => "ml-3 relative bg-gray-800 text-white px-3 py-2 rounded-md font-medium hover:bg-gray-900 focus:bg-gray-700" %>
+               <% if user_signed_in? %>
+                <% if current_user.admin? %>
+                  <%= link_to 'Admin Panel', administrators_path, :class => "ml-3 relative bg-gray-800 text-white px-3 py-2 rounded-md font-medium hover:bg-gray-900 focus:bg-gray-700" %>
+                <% end %>
               <% end %>
             </div>
           </div>
