@@ -23,9 +23,7 @@ class TransfersController < ApplicationController
   # POST /transfers or /transfers.json
   def create
     @transfer = Transfer.new(transfer_params)
-
     respond_to do |format|
-      
         if !params[:transfer][:items].nil?
           total = 0
           params[:transfer][:items].each do |f| 
@@ -35,17 +33,17 @@ class TransfersController < ApplicationController
           account = Account.where(["id = #{@transfer.account_id}"]).first
           new_total = account.amount - total
           if new_total > 0 
-            account.update(amount: new_total)
-            params[:transfer][:items].each do |f| 
-              Item.where(["id = #{f}"]).first.update(transfer_id: @transfer.id)
-            end
             if @transfer.save
+              account.update(amount: new_total)
+              params[:transfer][:items].each do |f| 
+                Item.where(["id = #{f}"]).first.update(transfer_id: @transfer.id)
+              end
+            
               format.html { redirect_to accounts_path, notice: "Transfer was successfully created." }
               format.json { render :show, status: :created, location: @transfer }
-            
           end
           else
-            format.html { redirect_to budgets_url, notice: "Esa cuenta no tiene suficiente plata"}
+            format.html { redirect_to budgets_url, notice: "The account hasn't got enough money"}
             format.json { render json: @transfer.errors, status: :unprocessable_entity }
           end
         end
