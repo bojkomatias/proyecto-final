@@ -76,6 +76,15 @@
                   <td class="px-6 py-4 whitespace-nowrap">
                     <div class="flex items-center">
                       <div class="ml-4">
+                        <div class=" font-medium text-gray-900">
+                          <%= i.amount %>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div class="ml-4">
                         <div class=" font-medium  text-gray-900">
                           <%= i.transfer_id.nil? ? '<div>&#x2718;</div>'.html_safe : '<div class="text-xl">&#x2713;</div>'.html_safe %>
                         </div>
@@ -84,6 +93,7 @@
                   </td>
                 </tr>
                 <% end %>
+
               </tbody>
               </table>
             </div>
