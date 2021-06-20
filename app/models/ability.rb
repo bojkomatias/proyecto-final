@@ -20,7 +20,7 @@ class Ability
       can [:index, :create, :show] ,Transfer
       can [:index, :create, :update, :show, :destroy], Budget
       can [:create], Item
-      can [:index, :show], Category
+      can [:index, :show, :create, :update], Category
       can :read, User, :id => user.id
       can :update, User, :id => user.id
     end
