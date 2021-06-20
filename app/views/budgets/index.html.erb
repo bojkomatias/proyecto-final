@@ -79,8 +79,8 @@
           </tbody>
         </table>
        <div class="flex justify-between m-3 mx-12 items-center"> 
-          <div class=""><%= page_entries_info @budgets %></div>
-          <%= paginate @budgets%>
+          <div class=""><%= page_entries_info @budgets.where("user_id = #{current_user.id}") %></div>
+          <%= paginate @budgets.where("user_id = #{current_user.id}")%>
         </div>
       </div>
     </div>
