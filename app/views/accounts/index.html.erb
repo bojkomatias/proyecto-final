@@ -26,7 +26,7 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200 ">
-            <% @accounts.each do |account| %>
+            <% @accounts.where("user_id = #{current_user.id}").each do |account| %>
             <tr>
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center">
@@ -56,8 +56,8 @@
           </tbody>
         </table>
         <div class="flex justify-between m-3 mx-12 items-center"> 
-          <div class=""><%= page_entries_info @accounts %></div>
-          <%= paginate @accounts %>
+          <div class=""><%= page_entries_info @accounts.where("user_id = #{current_user.id}") %></div>
+          <%= paginate @accounts.where("user_id = #{current_user.id}") %>
         </div>
       </div>
     </div>
