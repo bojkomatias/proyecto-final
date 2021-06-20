@@ -13,7 +13,7 @@ class AccountsController < ApplicationController
 
     @transfers = Transfer.all.limit(5)
     @transfers = Transfer.order(:date).page params[:t_page]
-    @transfers = @transfers.where(["account_id LIKE :account_id", :account_id => ("%" + params[:account_id] + "%")]) unless params[:account_id].blank?
+    @transfers = @transfers.where(["cast(account_id as text) LIKE :account_id", :account_id => ("%" + params[:account_id] + "%")]) unless params[:account_id].blank?
   end
 
   # GET /accounts/1 or /accounts/1.json
