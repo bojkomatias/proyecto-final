@@ -3,5 +3,5 @@ class Category < ApplicationRecord
   has_many :items
   belongs_to :category, class_name: "Category", optional: true
 
-  paginates_per 5
+  paginates_per 3
 end
